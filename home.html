@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forma - Home</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        @keyframes premiumPopup {
+            0% { opacity: 0; transform: scale(0.96) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-popup {
+            animation: premiumPopup 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* 🌓 40% DARK TINT OVERLAY (5-10% Darker) */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(11, 11, 15, 0.4); 
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: 0;
+        }
+        
+        /* 🌊 FULL-WIDTH CENTERED BANNER WITH SMOOTH MASK GRADIENT */
+        .master-banner {
+            width: 100vw;
+            background: #000000; /* Seamlessly matches the asset's black base */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            height: 380px;      
+            margin: 0;
+            z-index: 1;
+            position: relative;
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+        }
+
+        .master-banner img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
+            object-fit: contain;
+        }
+
+        .gradient-wrapper {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px; 
+            padding-bottom: 80px;
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 750px; 
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .intro-card {
+            background: linear-gradient(135deg, rgba(15, 15, 20, 0.85) 0%, rgba(5, 5, 10, 0.75) 100%);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 45px;
+            margin-top: 10px;
+            margin-bottom: 60px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+            width: 100%;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .intro-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 113, 227, 0.8);
+        }
+
+        .sector-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #3399FF, #30D5C8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .intro-text h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
+        }
+
+        .intro-text p {
+            font-size: 16px;
+            line-height: 1.65;
+            color: #FFFFFF;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .site-footer {
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 30px;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-size: 13px;
+            color: #FFFFFF;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .master-banner { height: 220px; }
+            .intro-card { padding: 35px 24px; }
+            .intro-text h2 { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="master-banner">
+        <img src="https://raw.githubusercontent.com/ItzNotZombi3/forma-dummy-company/main/images/banner.png" alt="Forma Banner">
+    </div>
+
+    <div class="gradient-wrapper">
+        <div class="container animate-popup">
+            
+            <div class="intro-card">
+                <div class="sector-badge">Unit 1 Recap</div>
+                <div class="intro-text">
+                    <h2>What does Unit 1 cover?</h2>
+                    <p>This unit of <b>ITLE 7</b> covers the basics of entrepreneurship, — especially the qualities of an entrepreneur — ICT sectors, <b></b></p>
+                </div>
+            </div>
+
+            <footer class="site-footer">
+                <p>&copy; Engineered by ItznZ03. All rights reserved.</p>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
