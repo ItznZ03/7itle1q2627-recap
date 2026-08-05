@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITLE 7 - ICT Trends and Issues</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        @keyframes premiumPopup {
+            0% { opacity: 0; transform: scale(0.96) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-popup {
+            animation: premiumPopup 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* 🌓 COOL MIDNIGHT OVERLAY */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 12, 24, 0.55); 
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 0;
+        }
+
+        .gradient-wrapper {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px; 
+            padding-bottom: 60px;
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 800px; 
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 🏷️ MAIN HEADER TITLE */
+        .page-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .school-tag {
+            font-size: 13px;
+            font-weight: 700;
+            color: #00F2FE;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 50%, #6B11FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #A0AABF;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* 🃏 GLASS CARD COMPONENT */
+        .intro-card {
+            background: linear-gradient(135deg, rgba(18, 20, 38, 0.85) 0%, rgba(10, 12, 24, 0.75) 100%);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 24px;
+            padding: 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+            width: 100%;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 242, 254, 0.6);
+            box-shadow: 0 35px 70px rgba(0, 242, 254, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+        }
+
+        .sector-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00F2FE, #4FACFE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 16px;
+        }
+
+        .intro-text h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
+        }
+
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .grid-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            border-radius: 12px;
+            padding: 15px;
+        }
+
+        .grid-item h3 {
+            font-size: 16px;
+            color: #00F2FE;
+            margin-bottom: 6px;
+        }
+
+        .grid-item p {
+            font-size: 13px;
+            margin-bottom: 0;
+            color: #B0BEC5;
+            line-height: 1.5;
+        }
+
+        .grid-item.issue h3 {
+            color: #FF5252;
+        }
+
+        .grid-item.issue {
+            border-color: rgba(255, 82, 82, 0.25);
+        }
+
+        .site-footer {
+            width: 100%;
+            border-top: 1px solid rgba(0, 242, 254, 0.15);
+            padding-top: 24px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-size: 13px;
+            color: #A0AABF;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            font-weight: 500;
+        }
+
+        .site-footer a {
+            color: #00F2FE;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .site-footer a:hover {
+            color: #4FACFE;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 38px; }
+            .subtitle { font-size: 14px; }
+            .intro-card { padding: 35px 24px; }
+            .intro-text h2 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gradient-wrapper">
+        <div class="container animate-popup">
+            
+            <!-- Big Header Title -->
+            <header class="page-header">
+                <div class="school-tag">Ateneo de Davao University Junior High School</div>
+                <h1 class="main-title">ITLE 7</h1>
+                <p class="subtitle">ICT Trends & Emerging Issues</p>
+            </header>
+            
+            <!-- Key ICT Trends -->
+            <div class="intro-card">
+                <div class="sector-badge">Industry Developments</div>
+                <div class="intro-text">
+                    <h2>Key ICT Trends</h2>
+                    <div class="grid-list">
+                        <div class="grid-item">
+                            <h3>1. Technological Convergence</h3>
+                            <p>Convergence allows a single device to perform multiple tasks, saving both space and energy. For example, modern smartphones combine web browsing, file management, document printing, and direct communication into one system.</p>
+                        </div>
+                        <div class="grid-item">
+                            <h3>2. Social Media</h3>
+                            <p>Social media platforms allow users to create, share, and exchange ideas online. Services such as <b>Facebook, Instagram, TikTok, and YouTube</b> showcase how individuals stay connected through shared content.</p>
+                        </div>
+                        <div class="grid-item">
+                            <h3>3. Mobile Technologies</h3>
+                            <p>Mobile technology uses portable hardware—such as laptops, tablets, and smartwatches—to improve daily efficiency. These devices support essential functions, including navigation, messaging, productivity apps, and video conferencing.</p>
+                        </div>
+                        <div class="grid-item">
+                            <h3>4. Assistive Technology</h3>
+                            <p>Assistive technology helps individuals with disabilities perform daily tasks independently. Examples include hearing aids, mobility equipment, screen readers, and adaptive communication tools.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key ICT Issues -->
+            <div class="intro-card">
+                <div class="sector-badge">Critical Challenges</div>
+                <div class="intro-text">
+                    <h2>Emerging ICT Issues</h2>
+                    <div class="grid-list">
+                        <div class="grid-item issue">
+                            <h3>1. Cybercrime</h3>
+                            <p>Cybercrime involves illegal activities conducted online, such as financial fraud, cyberstalking, hacking, content piracy, and explicit content distribution. These security risks compromise user privacy and threaten network safety.</p>
+                        </div>
+                        <div class="grid-item issue">
+                            <h3>2. Digital Addiction</h3>
+                            <p>Digital addiction stems from the excessive or improper use of electronic devices and online platforms. Over time, unmanaged screen usage can negatively affect daily routines and overall well-being.</p>
+                        </div>
+                        <div class="grid-item issue">
+                            <h3>3. Health & Safety Concerns</h3>
+                            <p>Extended technology use can lead to physical issues such as digital eye strain, neck pain, and poor posture. Remaining in stationary positions for long periods often causes joint discomfort and physical fatigue.</p>
+                        </div>
+                        <div class="grid-item issue">
+                            <h3>4. Erosion of Social Skills</h3>
+                            <p>Overreliance on virtual communication can weaken real-world social interaction skills. Excessive screen time reduces opportunities for meaningful face-to-face conversations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="site-footer">
+                <p>&copy; S.Y. 2026–2027 • Engineered by <strong>ItznZ03</strong>. All rights reserved.</p>
+                <p style="margin-top: 6px; font-size: 12px; opacity: 0.85;">
+                    Background Asset: <em>Code on Screen</em> by 
+                    <a href="https://unsplash.com/@florianolivo" target="_blank">Florian Olivo</a> via Unsplash.
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
