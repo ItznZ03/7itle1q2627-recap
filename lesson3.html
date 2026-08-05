@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITLE 7 - Entrepreneurship</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        @keyframes premiumPopup {
+            0% { opacity: 0; transform: scale(0.96) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-popup {
+            animation: premiumPopup 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* 🌓 COOL MIDNIGHT OVERLAY */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 12, 24, 0.55); 
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 0;
+        }
+
+        .gradient-wrapper {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px; 
+            padding-bottom: 60px;
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 800px; 
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 🏷️ MAIN HEADER TITLE */
+        .page-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .school-tag {
+            font-size: 13px;
+            font-weight: 700;
+            color: #00F2FE;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 50%, #6B11FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #A0AABF;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* 🃏 GLASS CARD COMPONENT */
+        .intro-card {
+            background: linear-gradient(135deg, rgba(18, 20, 38, 0.85) 0%, rgba(10, 12, 24, 0.75) 100%);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 24px;
+            padding: 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+            width: 100%;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 242, 254, 0.6);
+            box-shadow: 0 35px 70px rgba(0, 242, 254, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+        }
+
+        .sector-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00F2FE, #4FACFE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 16px;
+        }
+
+        .intro-text h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
+        }
+
+        /* 📊 TABULAR QUALITIES STYLING */
+        .qualities-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 15px;
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .qualities-table th, 
+        .qualities-table td {
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .qualities-table th {
+            background: rgba(0, 242, 254, 0.08);
+            color: #00F2FE;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .qualities-table td {
+            background: rgba(255, 255, 255, 0.02);
+            color: #B0BEC5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.5;
+            transition: background 0.2s ease;
+        }
+
+        .qualities-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .qualities-table tr:hover td {
+            background: rgba(0, 242, 254, 0.05);
+            color: #FFFFFF;
+        }
+
+        .quality-name {
+            color: #00F2FE;
+            font-weight: 600;
+            white-space: nowrap;
+            width: 25%;
+        }
+
+        /* 🗂️ GRID LIST FOR ENTREPRENEURS */
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .grid-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(79, 172, 254, 0.25);
+            border-radius: 12px;
+            padding: 18px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 242, 254, 0.5);
+        }
+
+        .grid-item h3 {
+            font-size: 16px;
+            color: #4FACFE;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .grid-item p {
+            font-size: 13px;
+            margin-bottom: 0;
+            color: #B0BEC5;
+            line-height: 1.5;
+        }
+
+        .site-footer {
+            width: 100%;
+            border-top: 1px solid rgba(0, 242, 254, 0.15);
+            padding-top: 24px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-size: 13px;
+            color: #A0AABF;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            font-weight: 500;
+        }
+
+        .site-footer a {
+            color: #00F2FE;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .site-footer a:hover {
+            color: #4FACFE;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 38px; }
+            .subtitle { font-size: 14px; }
+            .intro-card { padding: 30px 20px; }
+            .intro-text h2 { font-size: 22px; }
+            .qualities-table th, .qualities-table td { padding: 10px 12px; font-size: 13px; }
+            .quality-name { width: 35%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gradient-wrapper">
+        <div class="container animate-popup">
+            
+            <!-- Big Header Title -->
+            <header class="page-header">
+                <div class="school-tag">Ateneo de Davao University Junior High School</div>
+                <h1 class="main-title">ITLE 7</h1>
+                <p class="subtitle">Entrepreneurship Core Concepts</p>
+            </header>
+            
+            <!-- Key Qualities of a Successful Entrepreneur (Tabular View) -->
+            <div class="intro-card">
+                <div class="sector-badge">Essential Mindsets</div>
+                <div class="intro-text">
+                    <h2>Key Qualities of an Entrepreneur</h2>
+                    
+                    <table class="qualities-table">
+                        <thead>
+                            <tr>
+                                <th>Quality</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="quality-name">Creativity</td>
+                                <td>Ability to devise inventive solutions and fresh ideas that give a business its competitive edge[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Passion</td>
+                                <td>Strong drive and enthusiasm that sustain long-term commitment toward achieving key goals[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Professionalism</td>
+                                <td>Consistent practice of ethical conduct, reliability, and competence across all industry interactions[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Risk-Taking</td>
+                                <td>Readiness to explore uncertain business ventures while carefully evaluating potential setbacks[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Planning</td>
+                                <td>Systematic approach to establishing clear goals, allocating resources, and defining actionable steps[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Knowledge</td>
+                                <td>Solid understanding of market conditions, operational details, and relevant industry trends[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Social Skills</td>
+                                <td>Effective communication and interpersonal abilities needed to build strong networks and partnerships[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Open-Mindedness</td>
+                                <td>Willingness to welcome new perspectives, adapt to dynamic markets, and learn from experience[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Empathy</td>
+                                <td>Capacity to understand team dynamics and customer needs, fostering better workplace culture and client trust[cite: 1].</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Valuing Clients</td>
+                                <td>Commitment to prioritizing customer satisfaction as the foundation of long-term business loyalty[cite: 1].</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- World-Famous Entrepreneurs -->
+            <div class="intro-card">
+                <div class="sector-badge">Industry Icons</div>
+                <div class="intro-text">
+                    <h2>World-Famous Entrepreneurs</h2>
+                    <div class="grid-list">
+                        <div class="grid-item">
+                            <h3>Steve Jobs (1955–2011)</h3>
+                            <p>Co-founder of Apple Inc. who reshaped consumer electronics and industrial design through products like the iPhone, iPad, and Mac[cite: 1].</p>
+                        </div>
+                        <div class="grid-item">
+                            <h3>Elon Musk (1971–present)</h3>
+                            <p>Founder of SpaceX and Tesla, Inc. who continues to advance innovations in electric mobility, clean energy, and space exploration[cite: 1].</p>
+                        </div>
+                        <div class="grid-item">
+                            <h3>Jeff Bezos (1964–present)</h3>
+                            <p>Founder of Amazon who expanded an online bookstore into a global leader in e-commerce and cloud computing[cite: 1].</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="site-footer">
+                <p>&copy; S.Y. 2026–2027 • Engineered by <strong>ItznZ03</strong>. All rights reserved.</p>
+                <p style="margin-top: 6px; font-size: 12px; opacity: 0.85;">
+                    Background Asset: <em>Code on Screen</em> by 
+                    <a href="https://unsplash.com/@florianolivo" target="_blank">Florian Olivo</a> via Unsplash.
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
