@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITLE 7 | ICT Safety Standards & Environment</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        @keyframes premiumPopup {
+            0% { opacity: 0; transform: scale(0.96) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-popup {
+            animation: premiumPopup 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* 🌓 COOL MIDNIGHT OVERLAY */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 12, 24, 0.55); 
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 0;
+        }
+
+        .gradient-wrapper {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px; 
+            padding-bottom: 60px;
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 800px; 
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 🏷️ MAIN HEADER TITLE */
+        .page-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .school-tag {
+            font-size: 13px;
+            font-weight: 700;
+            color: #00F2FE;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 50%, #6B11FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #A0AABF;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* 🃏 GLASS CARD COMPONENT */
+        .intro-card {
+            background: linear-gradient(135deg, rgba(18, 20, 38, 0.85) 0%, rgba(10, 12, 24, 0.75) 100%);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 24px;
+            padding: 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+            width: 100%;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 242, 254, 0.6);
+            box-shadow: 0 35px 70px rgba(0, 242, 254, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+        }
+
+        /* Warm-themed variant border hover for hazards card */
+        .intro-card.hazard-theme {
+            border-color: rgba(255, 87, 34, 0.3);
+        }
+
+        .intro-card.hazard-theme:hover {
+            border-color: rgba(255, 87, 34, 0.7);
+            box-shadow: 0 35px 70px rgba(255, 87, 34, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+        }
+
+        .sector-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00F2FE, #4FACFE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 16px;
+        }
+
+        .sector-badge.warm-badge {
+            background: linear-gradient(90deg, #FF3366, #FF9900);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-text h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
+        }
+
+        /* 📊 TABULAR STYLING */
+        .qualities-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 15px;
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .qualities-table th, 
+        .qualities-table td {
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .qualities-table th {
+            background: rgba(0, 242, 254, 0.08);
+            color: #00F2FE;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .qualities-table td {
+            background: rgba(255, 255, 255, 0.02);
+            color: #B0BEC5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.5;
+            transition: background 0.2s ease;
+        }
+
+        .qualities-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .qualities-table tr:hover td {
+            background: rgba(0, 242, 254, 0.05);
+            color: #FFFFFF;
+        }
+
+        .quality-name {
+            color: #00F2FE;
+            font-weight: 600;
+            white-space: nowrap;
+            width: 25%;
+        }
+
+        /* 🗂️ GRID LIST & WARM HAZARD CARDS */
+        .grid-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .hazard-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 18px 22px;
+            border-left: 5px solid;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .hazard-card:hover {
+            transform: translateX(4px);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* Warm palette gradient sequence: Red (Highest Danger) -> Orange -> Orange-Yellow (Lowest Danger) */
+        .hazard-level-5 {
+            border-left-color: #FF2A4B;
+            border-top: 1px solid rgba(255, 42, 75, 0.2);
+            border-right: 1px solid rgba(255, 42, 75, 0.1);
+            border-bottom: 1px solid rgba(255, 42, 75, 0.1);
+        }
+        .hazard-level-5 h3 { color: #FF2A4B; }
+
+        .hazard-level-4 {
+            border-left-color: #FF5E36;
+            border-top: 1px solid rgba(255, 94, 54, 0.2);
+            border-right: 1px solid rgba(255, 94, 54, 0.1);
+            border-bottom: 1px solid rgba(255, 94, 54, 0.1);
+        }
+        .hazard-level-4 h3 { color: #FF5E36; }
+
+        .hazard-level-3 {
+            border-left-color: #FF8C00;
+            border-top: 1px solid rgba(255, 140, 0, 0.2);
+            border-right: 1px solid rgba(255, 140, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 140, 0, 0.1);
+        }
+        .hazard-level-3 h3 { color: #FF8C00; }
+
+        .hazard-level-2 {
+            border-left-color: #FFAA00;
+            border-top: 1px solid rgba(255, 170, 0, 0.2);
+            border-right: 1px solid rgba(255, 170, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 170, 0, 0.1);
+        }
+        .hazard-level-2 h3 { color: #FFAA00; }
+
+        .hazard-level-1 {
+            border-left-color: #FFC800;
+            border-top: 1px solid rgba(255, 200, 0, 0.2);
+            border-right: 1px solid rgba(255, 200, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 200, 0, 0.1);
+        }
+        .hazard-level-1 h3 { color: #FFC800; }
+
+        .hazard-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hazard-card p {
+            font-size: 13.5px;
+            color: #B0BEC5;
+            line-height: 1.5;
+        }
+
+        .danger-tag {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .site-footer {
+            width: 100%;
+            border-top: 1px solid rgba(0, 242, 254, 0.15);
+            padding-top: 24px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-size: 13px;
+            color: #A0AABF;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            font-weight: 500;
+        }
+
+        .site-footer a {
+            color: #00F2FE;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .site-footer a:hover {
+            color: #4FACFE;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 38px; }
+            .subtitle { font-size: 14px; }
+            .intro-card { padding: 30px 20px; }
+            .intro-text h2 { font-size: 22px; }
+            .qualities-table th, .qualities-table td { padding: 10px 12px; font-size: 13px; }
+            .quality-name { width: 35%; }
+            .hazard-card h3 { flex-direction: column; align-items: flex-start; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gradient-wrapper">
+        <div class="container animate-popup">
+            
+            <!-- Big Header Title -->
+            <header class="page-header">
+                <div class="school-tag">Ateneo de Davao University Junior High School</div>
+                <h1 class="main-title">ITLE 7</h1>
+                <p class="subtitle">ICT Hazards & 5S Environment</p>
+            </header>
+            
+            <!-- 1. Common ICT Hazards (Themed Red -> Orange-Yellow) -->
+            <div class="intro-card hazard-theme">
+                <div class="sector-badge warm-badge">Risk Assessment Spectrum</div>
+                <div class="intro-text">
+                    <h2>Common ICT Hazards</h2>
+                    <div class="grid-list">
+
+                        <div class="hazard-card hazard-level-5">
+                            <h3>High-Voltage Hazards <span class="danger-tag">Extreme danger</span></h3>
+                            <p>Exposed CRT monitors and power supply units retaining dangerous, high-voltage electrical charges even after being disconnected.</p>
+                        </div>
+
+                        <div class="hazard-card hazard-level-4">
+                            <h3>Electrical Hazards <span class="danger-tag">High danger</span></h3>
+                            <p>Internal hardware components actively connected to live power currents that pose severe electrocution risks.</p>
+                        </div>
+
+                        <div class="hazard-card hazard-level-3">
+                            <h3>Chemical Hazards <span class="danger-tag">Moderate danger</span></h3>
+                            <p>Exposure to cleaning solvents, compressed gas dusters, and specialized keyboard cleaning chemicals.</p>
+                        </div>
+
+                        <div class="hazard-card hazard-level-2">
+                            <h3>Mechanical Hazards <span class="danger-tag">Moderate danger</span></h3>
+                            <p>Sharp chassis edges, internal metal frames, or moving cooling fans capable of causing physical cuts or pinches.</p>
+                        </div>
+
+                        <div class="hazard-card hazard-level-1">
+                            <h3>Physical Hazards <span class="danger-tag">Low danger</span></h3>
+                            <p>Loose cables trailing across walkways or wet, slippery floors presenting immediate trip and fall risks.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. The 5S Workplace Methodology -->
+            <div class="intro-card">
+                <div class="sector-badge">Workplace Organization</div>
+                <div class="intro-text">
+                    <h2>The 5S Methodology</h2>
+                    
+                    <table class="qualities-table">
+                        <thead>
+                            <tr>
+                                <th>Term</th>
+                                <th>English</th>
+                                <th>Action / Objective</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="quality-name">Seiri</td>
+                                <td>Sort</td>
+                                <td>Clear away unnecessary items; keep only essential tools at the workstation.</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Seiton</td>
+                                <td>Set in Order</td>
+                                <td>Arrange items systematically so every tool has an assigned position.</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Seiso</td>
+                                <td>Shine</td>
+                                <td>Clean and remove dust, debris, and clutter from work surfaces regularly.</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Seiketsu</td>
+                                <td>Standardize</td>
+                                <td>Maintain organized working conditions through uniform practices.</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Shitsuke</td>
+                                <td>Sustain</td>
+                                <td>Build long-term discipline to maintain safety and organizational standards consistently.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <footer class="site-footer">
+                <p>&copy; S.Y. 2026–2027 • Engineered by <strong>ItznZ03</strong>. All rights reserved.</p>
+                <p style="margin-top: 6px; font-size: 12px; opacity: 0.85;">
+                    Background Asset: <em>Code on Screen</em> by 
+                    <a href="https://unsplash.com/@florianolivo" target="_blank">Florian Olivo</a> via Unsplash.
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
