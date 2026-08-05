@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITLE 7 | Computer Number Systems & Base Conversions</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+        @keyframes premiumPopup {
+            0% { opacity: 0; transform: scale(0.96) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .animate-popup {
+            animation: premiumPopup 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2000&auto=format&fit=crop') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* 🌓 COOL MIDNIGHT OVERLAY */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 12, 24, 0.55); 
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 0;
+        }
+
+        .gradient-wrapper {
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px; 
+            padding-bottom: 60px;
+            flex-grow: 1;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 800px; 
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 🏷️ MAIN HEADER TITLE */
+        .page-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .school-tag {
+            font-size: 13px;
+            font-weight: 700;
+            color: #00F2FE;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .main-title {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #00F2FE 0%, #4FACFE 50%, #6B11FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #A0AABF;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        /* 🃏 GLASS CARD COMPONENT */
+        .intro-card {
+            background: linear-gradient(135deg, rgba(18, 20, 38, 0.85) 0%, rgba(10, 12, 24, 0.75) 100%);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            border-radius: 24px;
+            padding: 45px;
+            margin-bottom: 30px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+            width: 100%;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+
+        .intro-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 242, 254, 0.6);
+            box-shadow: 0 35px 70px rgba(0, 242, 254, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.25);
+        }
+
+        .sector-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #00F2FE, #4FACFE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 16px;
+        }
+
+        .intro-text h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #FFFFFF;
+            letter-spacing: -0.02em;
+        }
+
+        /* 📊 TABULAR QUALITIES STYLING */
+        .qualities-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 15px;
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .qualities-table th, 
+        .qualities-table td {
+            padding: 14px 18px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .qualities-table th {
+            background: rgba(0, 242, 254, 0.08);
+            color: #00F2FE;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .qualities-table td {
+            background: rgba(255, 255, 255, 0.02);
+            color: #B0BEC5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.5;
+            transition: background 0.2s ease;
+        }
+
+        .qualities-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .qualities-table tr:hover td {
+            background: rgba(0, 242, 254, 0.05);
+            color: #FFFFFF;
+        }
+
+        .quality-name {
+            color: #00F2FE;
+            font-weight: 600;
+            white-space: nowrap;
+            width: 25%;
+        }
+
+        /* 🗂️ GRID LIST FOR CONVERSIONS */
+        .grid-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .grid-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(79, 172, 254, 0.25);
+            border-radius: 12px;
+            padding: 22px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-3px);
+            border-color: rgba(0, 242, 254, 0.5);
+        }
+
+        .grid-item h3 {
+            font-size: 18px;
+            color: #4FACFE;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .grid-item p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #B0BEC5;
+            line-height: 1.5;
+        }
+
+        /* 💡 ENHANCED STEP & EXAMPLE BOXES */
+        .steps-list {
+            margin-left: 18px;
+            color: #D1D5DB;
+            font-size: 13.5px;
+            line-height: 1.6;
+        }
+
+        .steps-list li {
+            margin-bottom: 6px;
+        }
+
+        .example-box {
+            margin-top: 12px;
+            background: rgba(0, 242, 254, 0.06);
+            border-left: 3px solid #00F2FE;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #E2E8F0;
+        }
+
+        .example-box strong {
+            color: #00F2FE;
+        }
+
+        code {
+            background: rgba(0, 242, 254, 0.12);
+            color: #00F2FE;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12.5px;
+        }
+
+        .site-footer {
+            width: 100%;
+            border-top: 1px solid rgba(0, 242, 254, 0.15);
+            padding-top: 24px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-size: 13px;
+            color: #A0AABF;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+            font-weight: 500;
+        }
+
+        .site-footer a {
+            color: #00F2FE;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .site-footer a:hover {
+            color: #4FACFE;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .main-title { font-size: 38px; }
+            .subtitle { font-size: 14px; }
+            .intro-card { padding: 30px 20px; }
+            .intro-text h2 { font-size: 22px; }
+            .qualities-table th, .qualities-table td { padding: 10px 12px; font-size: 13px; }
+            .quality-name { width: 35%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gradient-wrapper">
+        <div class="container animate-popup">
+            
+            <!-- Big Header Title -->
+            <header class="page-header">
+                <div class="school-tag">Ateneo de Davao University Junior High School</div>
+                <h1 class="main-title">ITLE 7</h1>
+                <p class="subtitle">Computer Number Systems</p>
+            </header>
+            
+            <!-- Number Systems Overview (Tabular View) -->
+            <div class="intro-card">
+                <div class="sector-badge">Core Concepts</div>
+                <div class="intro-text">
+                    <h2>Computer Number Systems</h2>
+                    
+                    <table class="qualities-table">
+                        <thead>
+                            <tr>
+                                <th>System</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="quality-name">Binary (Base 2)</td>
+                                <td>Uses digits 0 and 1. It is the core language of computers representing ON/OFF states of electronic switches.</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Octal (Base 8)</td>
+                                <td>Uses digits 0 through 7. Used as a compact notation for grouping binary numbers in digital electronics and in UNIX systems.</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Decimal (Base 10)</td>
+                                <td>Uses digits 0 through 9. The standard positional numbering system used by humans.</td>
+                            </tr>
+                            <tr>
+                                <td class="quality-name">Hexadecimal (Base 16)</td>
+                                <td>Uses digits 0–9 and letters A–F (A=10, B=11, C=12, D=13, E=14, F=15). Commonly used in memory addressing.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Conversion Methods -->
+            <div class="intro-card">
+                <div class="sector-badge">Step-by-Step Methods</div>
+                <div class="intro-text">
+                    <h2>Number Conversions</h2>
+                    <div class="grid-list">
+                        
+                        <!-- Decimal to Base n -->
+                        <div class="grid-item">
+                            <h3>1. Decimal to Base n (Division Method)</h3>
+                            <p>Used to convert a standard base-10 number into Binary (Base 2), Octal (Base 8), or Hexadecimal (Base 16).</p>
+                            <ol class="steps-list">
+                                <li>Divide the decimal number by the target base <code>n</code>.</li>
+                                <li>Record the remainder: the first remainder is the <strong>Least Significant Bit (LSB)</strong>.</li>
+                                <li>Repeat division with the quotient until it reaches <code>0</code>. The last remainder is the <strong>Most Significant Bit (MSB)</strong>.</li>
+                                <li>Read from <strong>MSB to LSB</strong> (bottom to top).</li>
+                            </ol>
+                            <div class="example-box">
+                                <strong>Example (Decimal 13 to Binary Base 2):</strong><br>
+                                13 ÷ 2 = 6 (rem <code>1</code>) ← <strong>LSB</strong><br>
+                                6 ÷ 2 = 3 (rem <code>0</code>)<br>
+                                3 ÷ 2 = 1 (rem <code>1</code>)<br>
+                                1 ÷ 2 = 0 (rem <code>1</code>) ← <strong>MSB</strong><br>
+                                Result (MSB → LSB): <strong>1101₂</strong>
+                            </div>
+                        </div>
+
+                        <!-- Base n to Decimal -->
+                        <div class="grid-item">
+                            <h3>2. Base n to Decimal (Positional Expansion)</h3>
+                            <p>Used to convert Binary, Octal, or Hexadecimal back into a standard Base-10 Decimal number.</p>
+                            <ol class="steps-list">
+                                <li>Identify positional values: start with power <code>n⁰</code> at the <strong>LSB</strong> (rightmost bit) up to <code>n<sup>k</sup></code> at the <strong>MSB</strong> (leftmost bit).</li>
+                                <li>Multiply each digit by its corresponding power of <code>n</code>.</li>
+                                <li>Sum all values together to get the final Decimal value.</li>
+                            </ol>
+                            <div class="example-box">
+                                <strong>Example (Binary 1011₂ to Decimal):</strong><br>
+                                Position 3 (MSB) to Position 0 (LSB):<br>
+                                (1 × 2³) + (0 × 2²) + (1 × 2¹) + (1 × 2⁰)<br>
+                                = 8 + 0 + 2 + 1 = <strong>11₁₀</strong>
+                            </div>
+                        </div>
+
+                        <!-- Binary to Hexadecimal -->
+                        <div class="grid-item">
+                            <h3>3. Binary to Hexadecimal (4-Bit Grouping)</h3>
+                            <p>Direct shortcut conversion without needing full decimal intermediate calculations.</p>
+                            <ol class="steps-list">
+                                <li>Group the binary digits into sets of 4 bits starting from the <strong>LSB</strong> (right side) moving towards the <strong>MSB</strong> (left side).</li>
+                                <li>Pad the <strong>MSB group</strong> with leading zeros if it contains fewer than 4 bits.</li>
+                                <li>Convert each 4-bit block into its Hexadecimal value (<code>0–9</code>, or <code>A–F</code> for 10–15).</li>
+                            </ol>
+                            <div class="example-box">
+                                <strong>Example (Binary 11010110₂ to Hex):</strong><br>
+                                MSB group | LSB group: <code>1101</code> | <code>0110</code><br>
+                                1101 = 13 (Hex <strong>D</strong>)<br>
+                                0110 = 6 (Hex <strong>6</strong>)<br>
+                                Result: <strong>D6₁₆</strong>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <footer class="site-footer">
+                <p>&copy; S.Y. 2026–2027 • Engineered by <strong>ItznZ03</strong>. All rights reserved.</p>
+                <p style="margin-top: 6px; font-size: 12px; opacity: 0.85;">
+                    Background Asset: <em>Code on Screen</em> by 
+                    <a href="https://unsplash.com/@florianolivo" target="_blank">Florian Olivo</a> via Unsplash.
+                </p>
+            </footer>
+
+        </div>
+    </div>
+
+</body>
+</html>
