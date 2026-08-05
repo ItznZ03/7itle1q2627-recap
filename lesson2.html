@@ -140,37 +140,80 @@
 
         .grid-list {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
 
+        /* 🎴 MINI TILE */
         .grid-item {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(0, 242, 254, 0.15);
-            border-radius: 12px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 📐 SIDE-BY-SIDE HEADER (IMAGE + TITLE) */
+        .grid-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        /* Dynamic SVG Masking & Coloring for Monochrome Icons */
+        .grid-icon-mask {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+            background-color: #00F2FE;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            filter: drop-shadow(0 2px 8px rgba(0, 242, 254, 0.4));
+        }
+
+        /* Standard Multi-Color SVG Image Class */
+        .grid-icon-img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 8px rgba(0, 242, 254, 0.3));
         }
 
         .grid-item h3 {
             font-size: 16px;
+            font-weight: 700;
             color: #00F2FE;
-            margin-bottom: 6px;
+            line-height: 1.3;
+            margin: 0;
         }
 
         .grid-item p {
             font-size: 13px;
-            margin-bottom: 0;
             color: #B0BEC5;
             line-height: 1.5;
+            margin-bottom: 0;
+        }
+
+        /* Issue-specific Styling (Red Theme) */
+        .grid-item.issue {
+            border-color: rgba(255, 82, 82, 0.25);
         }
 
         .grid-item.issue h3 {
             color: #FF5252;
         }
 
-        .grid-item.issue {
-            border-color: rgba(255, 82, 82, 0.25);
+        .grid-item.issue .grid-icon-mask {
+            background-color: #FF5252;
+            filter: drop-shadow(0 2px 8px rgba(255, 82, 82, 0.4));
         }
 
         .site-footer {
@@ -212,7 +255,7 @@
     <div class="gradient-wrapper">
         <div class="container animate-popup">
             
-            <!-- Big Header Title -->
+            <!-- Header -->
             <header class="page-header">
                 <div class="school-tag">Ateneo de Davao University Junior High School</div>
                 <h1 class="main-title">ITLE 7</h1>
@@ -225,48 +268,90 @@
                 <div class="intro-text">
                     <h2>Key ICT Trends</h2>
                     <div class="grid-list">
+                        
+                        <!-- Mini Tile 1 -->
                         <div class="grid-item">
-                            <h3>1. Technological Convergence</h3>
+                            <div class="grid-header">
+                                <img src="https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/ram.svg" alt="Technological Convergence" class="grid-icon-img">
+                                <h3>1. Technological Convergence</h3>
+                            </div>
                             <p>Convergence allows a single device to perform multiple tasks, saving both space and energy. For example, modern smartphones combine web browsing, file management, document printing, and direct communication into one system.</p>
                         </div>
+
+                        <!-- Mini Tile 2 -->
                         <div class="grid-item">
-                            <h3>2. Social Media</h3>
+                            <div class="grid-header">
+                                <img src="https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/facebook1.svg" alt="Social Media" class="grid-icon-img">
+                                <h3>2. Social Media</h3>
+                            </div>
                             <p>Social media platforms allow users to create, share, and exchange ideas online. Services such as <b>Facebook, Instagram, TikTok, and YouTube</b> showcase how individuals stay connected through shared content.</p>
                         </div>
+
+                        <!-- Mini Tile 3 -->
                         <div class="grid-item">
-                            <h3>3. Mobile Technologies</h3>
+                            <div class="grid-header">
+                                <div class="grid-icon-mask" style="-webkit-mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/phone.svg'); mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/phone.svg');"></div>
+                                <h3>3. Mobile Technologies</h3>
+                            </div>
                             <p>Mobile technology uses portable hardware—such as laptops, tablets, and smartwatches—to improve daily efficiency. These devices support essential functions, including navigation, messaging, productivity apps, and video conferencing.</p>
                         </div>
+
+                        <!-- Mini Tile 4 -->
                         <div class="grid-item">
-                            <h3>4. Assistive Technology</h3>
+                            <div class="grid-header">
+                                <div class="grid-icon-mask" style="-webkit-mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/tts.svg'); mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/tts.svg');"></div>
+                                <h3>4. Assistive Technology</h3>
+                            </div>
                             <p>Assistive technology helps individuals with disabilities perform daily tasks independently. Examples include hearing aids, mobility equipment, screen readers, and adaptive communication tools.</p>
                         </div>
+
                     </div>
                 </div>
             </div>
 
-            <!-- Key ICT Issues -->
+            <!-- Emerging ICT Issues -->
             <div class="intro-card">
                 <div class="sector-badge">Critical Challenges</div>
                 <div class="intro-text">
                     <h2>Emerging ICT Issues</h2>
                     <div class="grid-list">
+                        
+                        <!-- Mini Tile 1 -->
                         <div class="grid-item issue">
-                            <h3>1. Cybercrime</h3>
+                            <div class="grid-header">
+                                <div class="grid-icon-mask" style="-webkit-mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/black-hat-hacker.svg'); mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/black-hat-hacker.svg');"></div>
+                                <h3>1. Cybercrime</h3>
+                            </div>
                             <p>Cybercrime involves illegal activities conducted online, such as financial fraud, cyberstalking, hacking, content piracy, and explicit content distribution. These security risks compromise user privacy and threaten network safety.</p>
                         </div>
+
+                        <!-- Mini Tile 2 -->
                         <div class="grid-item issue">
-                            <h3>2. Digital Addiction</h3>
+                            <div class="grid-header">
+                                <div class="grid-icon-mask" style="-webkit-mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/monitor-water.svg'); mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/monitor-water.svg');"></div>
+                                <h3>2. Digital Addiction</h3>
+                            </div>
                             <p>Digital addiction stems from the excessive or improper use of electronic devices and online platforms. Over time, unmanaged screen usage can negatively affect daily routines and overall well-being.</p>
                         </div>
+
+                        <!-- Mini Tile 3 -->
                         <div class="grid-item issue">
-                            <h3>3. Health & Safety Concerns</h3>
+                            <div class="grid-header">
+                                <div class="grid-icon-mask" style="-webkit-mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/health.svg'); mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/health.svg');"></div>
+                                <h3>3. Health & Safety Concerns</h3>
+                            </div>
                             <p>Extended technology use can lead to physical issues such as digital eye strain, neck pain, and poor posture. Remaining in stationary positions for long periods often causes joint discomfort and physical fatigue.</p>
                         </div>
+
+                        <!-- Mini Tile 4 -->
                         <div class="grid-item issue">
-                            <h3>4. Erosion of Social Skills</h3>
+                            <div class="grid-header">
+                                <div class="grid-icon-mask" style="-webkit-mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/social-dist.svg'); mask-image: url('https://raw.githubusercontent.com/ItznZ03/7itle1q2627-recap/main/images/social-dist.svg');"></div>
+                                <h3>4. Erosion of Social Skills</h3>
+                            </div>
                             <p>Overreliance on virtual communication can weaken real-world social interaction skills. Excessive screen time reduces opportunities for meaningful face-to-face conversations.</p>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -275,7 +360,8 @@
                 <p>&copy; S.Y. 2026–2027 • Engineered by <strong>ItznZ03</strong>. All rights reserved.</p>
                 <p style="margin-top: 6px; font-size: 12px; opacity: 0.85;">
                     Background Asset: <em>Code on Screen</em> by 
-                    <a href="https://unsplash.com/@florianolivo" target="_blank">Florian Olivo</a> via Unsplash.
+                    <a href="https://unsplash.com/@florianolivo" target="_blank">Florian Olivo</a> via Unsplash. | 
+                    <a href="credits.html">View Full Asset Credits</a>
                 </p>
             </footer>
 
